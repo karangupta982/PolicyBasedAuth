@@ -123,8 +123,10 @@ const AdminAssignPage = () => {
 
   const fetchData = async () => {
     try {
-      const studentRes = await axios.get<Student[]>('http://localhost:5000/api/v1/admin/unassignedstudents');
-      const teacherRes = await axios.get<Teacher[]>('http://localhost:5000/api/v1/admin/teachers');
+      const studentRes = await axios.get<Student[]>('https://policybasedauth.onrender.com/api/v1/admin/unassignedstudents');
+    //   const studentRes = await axios.get<Student[]>('http://localhost:5000/api/v1/admin/unassignedstudents');
+      const teacherRes = await axios.get<Teacher[]>('https://policybasedauth.onrender.com/api/v1/admin/teachers');
+    //   const teacherRes = await axios.get<Teacher[]>('http://localhost:5000/api/v1/admin/teachers');
       console.log("unassigned students:", studentRes.data);
       console.log("teachers:", teacherRes.data);
 
@@ -140,7 +142,8 @@ const AdminAssignPage = () => {
     if (!teacherId) return alert('Select a teacher first!');
 
     try {
-      await axios.put('http://localhost:5000/api/v1/admin/assignteacher', { studentId, teacherId });
+      await axios.put('https://policybasedauth.onrender.com/api/v1/admin/assignteacher', { studentId, teacherId });
+    //   await axios.put('http://localhost:5000/api/v1/admin/assignteacher', { studentId, teacherId });
       alert('Teacher Assigned!');
       fetchData(); // Refresh the data
     } catch (error) {

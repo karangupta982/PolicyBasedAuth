@@ -82,7 +82,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const router = useRouter();
 
-  // 🛠 Fixing "any" type
+ 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -92,7 +92,8 @@ const Login = () => {
     try {
       console.log("formData: ", formData);
       const res = await axios.post(
-        'http://localhost:5000/api/v1/auth/login',
+        'https://policybasedauth.onrender.com/api/v1/auth/login',
+        // 'http://localhost:5000/api/v1/auth/login',
         formData,
         {
           withCredentials: true,

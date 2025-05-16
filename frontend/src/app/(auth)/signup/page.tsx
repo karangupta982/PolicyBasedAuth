@@ -86,7 +86,8 @@ export default function Signup() {
     e.preventDefault();
     try {
       console.log("formData:", formData);
-      const res = await axios.post('http://localhost:5000/api/v1/auth/signup', formData);
+      const res = await axios.post('https://policybasedauth.onrender.com/api/v1/auth/signup', formData);
+      // const res = await axios.post('http://localhost:5000/api/v1/auth/signup', formData);
       console.log("res:", res);
       setMessage(res.data.message || 'Signup successful');
     } catch (err: unknown) {
