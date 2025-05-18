@@ -7,6 +7,17 @@ const TeacherSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    dataScope:{
+      type:String,
+      default: "assigned",
+    },
+    actions: {
+      type: [{
+        type: String,
+        enum: ['view', 'edit', 'delete'],
+      }],
+      default:  ['view', 'edit'], 
+    },
     students: [
       {
         type: mongoose.Schema.Types.ObjectId,

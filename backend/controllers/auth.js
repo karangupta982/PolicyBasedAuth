@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import Student from "../models/Student.js";
 import Teacher from "../models/Teacher.js";
+import Admin from "../models/Admin.js";
 
 
 dotenv.config();
@@ -12,7 +13,7 @@ export const signup = async (req, res) => {
     try {
         const { firstName, lastName, email, password, role } = req.body;
 
-        console.log("req ki body: ",req.body);
+        // console.log("req ki body: ",req.body);
       if (
         !firstName ||
         !lastName ||
@@ -45,11 +46,11 @@ export const signup = async (req, res) => {
         password:hashedPassword,
         role,
       });
-      console.log("user Created Successfully", newUser);
+      // console.log("user Created Successfully", newUser);
       if (role === "student") {
         await Student.create({
           user: newUser._id,
-          teacher: null, // Will be assigned later
+          teacher: null, // Will  assigne later
         });
       }
 
@@ -57,6 +58,12 @@ export const signup = async (req, res) => {
         await Teacher.create({
           user: newUser._id,
           students: [],
+        });
+      }
+
+      if (role === "admin") {
+        await Admin.create({
+          user: newUser._id,
         });
       }
       
@@ -115,7 +122,7 @@ export const signup = async (req, res) => {
   
         res.cookie("token", token, options).status(200).json({
           success: true,
-          token,
+          token : token,
           user,
           message: `User Login Successfull`,
         });
@@ -134,3 +141,6 @@ export const signup = async (req, res) => {
       });
     }
   };
+
+
+  

@@ -7,6 +7,8 @@ import authroutes from './routes/authRoutes.js';
 import {auth} from './middlewares/auth.js';
 import { getStudentData } from './controllers/studentController.js';
 import adminRoutes from './routes/adminRoutes.js'
+import { superAdminController } from './controllers/superAdminController.js';
+import courseRoutes from './routes/courseRoutes.js'
 
 dotenv.config();
 
@@ -18,14 +20,21 @@ app.use(cookieParser());
 
 // app.use(cors());
 app.use(cors({
-  origin: 'https://policy-based-auth.vercel.app', 
-  // origin: 'http://localhost:3000', 
+  // origin: 'https://policy-based-auth.vercel.app', 
+  origin: 'http://localhost:3000', 
   credentials: true,               
 }));
 
 app.use('/api/v1/auth',authroutes)
-app.use('/api/v1/students',auth, getStudentData)
+app.use('/api/v1/getstudentdata',auth, getStudentData)
 app.use('/api/v1/admin', adminRoutes)
+app.use('/api/v1/superadmin/roles', auth , adminRoutes)
+app.use('/api/v1/courses', auth, courseRoutes)
+
+
+
+
+
 
 
 mongoose.connect(process.env.MONGODB_URL, {

@@ -7,12 +7,30 @@ const StudentSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+
+
+    actions: {
+      type: [{
+        type: String,
+        enum: ['view', 'edit', 'delete'],
+      }],
+      default:  ['view'], 
+    },
+
+
     teacher: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Teacher', 
       
     },
-    enrollmentDate: { type: Date, default: Date.now },
+    dataScope:{
+      type:String,
+      default: "own",
+    },
+    enrollmentDate: { 
+      type: Date,
+      default: Date.now
+    },
   },
   { timestamps: true }
 );

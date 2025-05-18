@@ -11,5 +11,5 @@ export const policies = {
       actions: ["view"],
       dataScope: "own"
     }
-  };
+  }; 
   

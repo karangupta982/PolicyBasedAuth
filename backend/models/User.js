@@ -24,21 +24,17 @@ const UserSchema = new mongoose.Schema(
         },
         role:{
             type:String,
-            enum:['admin','student','teacher'],
+            enum:['admin','student','teacher','superadmin'],
             required:true,
             
         },
-        
         token: {
             type: String,
         },
-        // for token expiry time if resetPasswordExpires > date.now() then only user can reset password
         resetPasswordExpires: {
             type: Date,
             default: Date.now ,
         },
-            
-        
     },
     { timestamps: true }
 )

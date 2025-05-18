@@ -20,7 +20,7 @@ export const auth = async (req, res, next) => {
 		try {
 			
 			const decode = await jwt.verify(token, process.env.JWT_SECRET);
-			console.log(decode);
+			// console.log(decode);
 			
 			req.user = decode;
 		} catch (error) {
@@ -28,7 +28,7 @@ export const auth = async (req, res, next) => {
 				.status(401)
 				.json({ success: false, message: "token is invalid" });
 		}
-		console.log("Token is valid sending to route from middleware")
+		// console.log("Token is valid sending to route from middleware")
 		next();
 	} catch (error) {
 		
